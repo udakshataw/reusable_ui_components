@@ -1,3 +1,4 @@
 <h1><%= @tenant_name %></h1>
 <h4>Display form for selecting departments and related teams</h4>
 <h6>Department count: <%= dept_count %></h6>
+<%= render partial: 'reusable_ui_components/department_form/organization_fields', departments: org_data %>

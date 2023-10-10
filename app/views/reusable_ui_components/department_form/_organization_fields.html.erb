@@ -16,17 +16,6 @@
           <% end %>
         </select>
       </div>
-
-      <div class="md:w-4/12 items-center">
-        <p class="text-slate-400 font-semibold text-sm">Country</p>
-        <select id="selected_country" name="selected_country[]" class='border border-lightGray rounded h-8 w-full md:w-10/12 text-xs'>
-          <% countries.each do |country| %>
-            <option value="<%= org[:id] %>|<%= country['countryId'] %>" data-country-data="<%= country.to_json %>">
-              <%= country['countryData']['countryName'] %>
-            </option>
-          <% end %>
-        </select>
-      </div>
     </div>
   <% end %>
 </div>
