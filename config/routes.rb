@@ -4,6 +4,7 @@
 Rails.application.routes.draw do
     namespace :reusable_ui_components do
         get '/', to: 'department_form#index'
-        get '/graph_data', to: 'department_form#get_graph_data'
+        get '/data', to: 'department_form#get_graph_data'
+        get '/graph_data', to: 'department_form#fetch_all_data'
     end
 end
