@@ -179,6 +179,8 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.6.6-x86_64-linux)
     stringio (3.0.8)
+    tailwindcss-rails (2.0.30-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -197,6 +199,7 @@ DEPENDENCIES
   reusable_ui_components!
   sprockets-rails
   sqlite3
+  tailwindcss-rails
 
 BUNDLED WITH
    2.4.20
