@@ -32,18 +32,34 @@ module ReusableUiComponents
         data = JSON.parse(response.body)["value"]
       end
 
-      # puts "Inside get graph data---------------"
-      # url = params[:url]
-      # data = []
-
-      # if url == "ids"
-      #   data = [1, 2, 3, 4, 5]
-      # else
-      #   data = ["aa", "bb", "cc"]
-      # end
-
       respond_to do |f|
         f.json { render json: data }
+      end
+    end
+
+    def fetch_all_data(link, token)
+      allData = []
+  
+      response = HTTParty.get(link, headers: { "Authorization" => "Bearer #{token}" })
+      resp_body = JSON.parse(response.body)
+      allData = resp_body["value"]
+      next_link = resp_body["@odata.nextLink"]
+  
+      if next_link.present?
+        while next_link
+          data = HTTParty.get(next_link, headers: { "Authorization" => "Bearer #{token}" })
+          body_data = JSON.parse(data.body)
+          vals = body_data["value"]
+          vals.each do |v|
+            allData << v
+          end
+          next_link = body_data["@odata.nextLink"]
+        end
+      end
+
+      
+      respond_to do |f|
+        f.json { render json: allData }
       end
     end
   end
