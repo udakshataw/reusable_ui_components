@@ -1,0 +1,32 @@
+<div id="org_data" class="h-full md:h-5/6 overflow-y-scroll p-2">
+  <% departments.each_with_index do |org, i| %>
+    <div id="<%= org[:id] %>" class="org-div flex flex-col md:flex-row gap-2 justify-center bg-white p-2 rounded-lg shadow mb-2">
+      <div class="w-full md:w-4/12 flex gap-2 items-center">
+        <input type="checkbox" name="selected_departments[]" value="<%= org[:id] %>|<%= org[:displayName] %>" class="h-4 w-4 md:h-3 md:w-3 rounded checked:bg-primary" />
+        <p class="text-slate-600 font-semibold text-base"><%= org[:displayName] %></p>
+      </div>
+      
+      <div class="md:w-4/12 items-center">
+        <p class="text-slate-400 font-semibold text-sm">Country</p>
+        <select id="selected_country" name="selected_country[]" class='border border-lightGray rounded h-8 w-full md:w-10/12 text-xs'>
+          <% ActiveSupport::TimeZone.all.each do |tz| %>
+            <option value="<%= org[:id] %>|<%= tz.name %>">
+              <%= tz.name %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="md:w-4/12 items-center">
+        <p class="text-slate-400 font-semibold text-sm">Country</p>
+        <select id="selected_country" name="selected_country[]" class='border border-lightGray rounded h-8 w-full md:w-10/12 text-xs'>
+          <% countries.each do |country| %>
+            <option value="<%= org[:id] %>|<%= country['countryId'] %>" data-country-data="<%= country.to_json %>">
+              <%= country['countryData']['countryName'] %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  <% end %>
+</div>
