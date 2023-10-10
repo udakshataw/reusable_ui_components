@@ -1,4 +1,28 @@
-<h1><%= @tenant_name %></h1>
-<h4>Display form for selecting departments and related teams</h4>
-<h6>Department count: <%= dept_count %></h6>
-<%= render partial: 'reusable_ui_components/department_form/organization_fields', locals: { departments: org_data } %>
+<head>
+  <meta name="csrf-token" content="<%= form_authenticity_token %>">
+</head>
+<div class="h-screen w-screen bg-white md:bg-backgroundImage md:bg-cover md:bg-center md:bg-no-repeat flex flex-col justify-center items-center">
+  <%= form_with url: registerpath, method: :post, class: "relative bg-white w-screen md:w-5/6 h-5/6 rounded flex flex-col justify-center items-center p-2" do |form| %>
+    <div class="w-full md:w-5/6 h-fit text-primary text-center font-bold text-2xl capitalize">
+      <p><%= tenant_name %></p>
+    </div>
+    <div class="w-full md:w-5/6 h-full md:h-4/6">
+      <% if dept_count > 0 %>
+        <p class="h-fit hidden md:block text-gray-700 font-fontWeightRegular text-xs text-center mb-2">By registering your team from Microsoft Teams, you can directly import all its members and channels to TeamPlus. The location that you choose will be set by default to all the employees. They can later change it from their Profile.</p>
+        <%= render partial: 'reusable_ui_components/department_form/organization_fields', locals: { departments: org_data, form: form } %>
+      <% else %>
+        <div class="h-full flex justify-center items-center px-2">
+          <p class="text-gray-700 font-fontWeightRegular text-md text-center mb-5">You have already registered all your teams from Microsoft Teams.</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="w-5/6 h-1/6 hidden md:flex justify-end items-center gap-2">
+      <%= submit_tag "Register a new Department", :disabled => dept_count == 0, class:"bg-primary text-white font-bold-400 py-2 px-4 text-sm rounded cursor-pointer disabled:opacity-50" %>
+      <%= link_to "Take me back", backpath, class:"text-xs text-gray-400" %>
+    </div>
+    <div class="md:hidden sm:block fixed inset-x-0 bottom-0 flex items-center h-10 w-full">
+      <%= link_to "Back", backpath, class:"h-10 w-6/12 bg-white text-primary text-center text-md font-semibold cursor-pointer border border-primary py-2 px-2 md:hidden" %>
+      <%= submit_tag "Register", :disabled => dept_count == 0, class:"h-10 w-6/12 bg-primary hover:bg-primary cursor-pointer text-white text-md font-semibold py-2 px-2 md:hidden" %>
+    </div>
+  <% end %>
+</div>
