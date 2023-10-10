@@ -37,7 +37,10 @@ module ReusableUiComponents
       end
     end
 
-    def fetch_all_data(link, token)
+    def fetch_all_data
+      puts "Inside fetch all graph data---------------"
+      link = params[:url]
+      token = params[:access_token]
       allData = []
   
       response = HTTParty.get(link, headers: { "Authorization" => "Bearer #{token}" })
@@ -57,7 +60,7 @@ module ReusableUiComponents
         end
       end
 
-      
+
       respond_to do |f|
         f.json { render json: allData }
       end
