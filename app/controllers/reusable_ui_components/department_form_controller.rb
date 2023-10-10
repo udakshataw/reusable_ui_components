@@ -23,22 +23,24 @@ module ReusableUiComponents
     end
 
     def get_graph_data
-      # url = params[:url]
-      # access_token = params[:access_token]
-      # data = []
-      # response = HTTParty.get(url, headers: { "Authorization" => "Bearer #{access_token}" })
-      # if response.success?
-      #   data = JSON.parse(response.body)["value"]
-      # end
-
+      puts "Inside get graph data---------------"
       url = params[:url]
+      access_token = params[:access_token]
       data = []
-
-      if url == "ids"
-        data = [1, 2, 3, 4, 5]
-      else
-        data = ["aa", "bb", "cc"]
+      response = HTTParty.get(url, headers: { "Authorization" => "Bearer #{access_token}" })
+      if response.success?
+        data = JSON.parse(response.body)["value"]
       end
+
+      # puts "Inside get graph data---------------"
+      # url = params[:url]
+      # data = []
+
+      # if url == "ids"
+      #   data = [1, 2, 3, 4, 5]
+      # else
+      #   data = ["aa", "bb", "cc"]
+      # end
 
       respond_to do |f|
         f.json { render json: data }
